@@ -1,4 +1,5 @@
 import redis, json, pickle, difflib
+from api.exceptions import *
 """
 Business logic for computing the diffs
 """
@@ -33,8 +34,6 @@ class Base():
         Retrieves data from storage as a json encoded string
         """
         data = self.dataImpl.read(self.key)
-        #data = pickle.loads(data)
-        #return json.dumps(data)
         return data
 
 
@@ -62,16 +61,15 @@ class Diff():
 
         try:
             right_data = self.right.get()
-            print(right_data)
             right_data = pickle.loads(right_data)
         except TypeError:
-            raise Exception('No data on right endpoint.')
+            raise NotFoundException('No data on right endpoint.')
 
         try:
             left_data = self.left.get()
             left_data = pickle.loads(left_data)
         except TypeError:
-            raise Exception('No data on left endpoint.')
+            raise NotFoundException('No data on left endpoint.')
 
         diff = {'diffs': []}
 
