@@ -89,24 +89,26 @@ class Diff():
             differ = difflib.Differ()
             diffs = list(differ.compare(str(left_data), str(right_data)))
 
+            # Strip right diffs to make offset computation easier.
+            # Note that this makes sense only because we are computing
+            # diffs for same size data.
+            diffs = [x for x in diffs if x[0] != '+']
+
             offset = None
             lenght = 0
 
             for i in enumerate(diffs):
-
                 # Equal
                 if i[1][0] == ' ':
                     if offset is not None:
                         diff['diffs'].append([offset, lenght])
                         offset = None
                         lenght = 0
-
                 # Found a diff
                 elif i[1][0] == '-':
                     lenght += 1
                     if offset is None:
                         offset = i[0]
 
+
         return diff
-
-
