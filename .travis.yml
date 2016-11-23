@@ -3,8 +3,16 @@ python:
   - "3.5"
   - "2.7"
 
+sudo: required
+
 # Install dependencies
 install: "pip install -r requirements.txt"
 services:
   - redis
+  - docker
 script: ./run_tests.sh
+
+build:
+  - docker-compose build
+  - docker-compose start
+  - docker-compose stop
