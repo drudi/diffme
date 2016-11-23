@@ -5,4 +5,5 @@ python:
 
 # Install dependencies
 install: "pip install -r requirements.txt"
+services: redis
 script: ./run_tests.sh

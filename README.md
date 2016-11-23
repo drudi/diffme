@@ -12,3 +12,5 @@ b'gAN9cQAoWAMAAABiYXJxAVgEAAAAMTIzNHECWAMAAABmb29xA1gFAAAAd29ybGRxBHUu'
 $
 ```
 and copy whats inside the single quotes
+
+CI running on https://travis-ci.org/drudi/diffme
