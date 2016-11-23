@@ -1,5 +1,6 @@
 # diffme
-Compute the diff between 2 API calls
+Compute the diff between two API calls
+
 
 This API uses the Bottle framework, and redis to keep the data.
 

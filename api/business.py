@@ -5,7 +5,7 @@ Business logic for computing the diffs
 """
 
 class RawData(object):
-    _db_addr = '127.0.0.1'
+    _db_addr = 'redis'
     _db_port = 6379
     _db_conn = None
 
