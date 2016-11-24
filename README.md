@@ -39,7 +39,7 @@ $ sh run_api.sh
 For running the tests:
 
 ```sh
-$ sh run_tests.#!/bin/sh
+$ sh run_tests.sh
 ```
 
 
@@ -67,4 +67,21 @@ $ curl -XGET http://127.0.0.1:8000/v1/diff
 
 ## Docker image on Docker HUB
 
-The api image can be found on Docker HUB in the following address
+The CI process builds the image, and publishes it on Docker HUB. It can be found on https://hub.docker.com/r/mdrudi/diffme/tags/
+
+To pull the the latest image:
+
+```sh
+$ docker pull mdrudi/diffme:latest
+```
+
+## The deployment
+
+The deployment automation is not finished yet. But a server was set up in Digital Ocean to host the API. The process used to deploy the application to this server was:
+
+- Copy docker-compose.yml.deploy file to docker-compose.yml in the production server
+- execute 'docker pull redis:latest' and 'docker pull mdrudi/diffme:latest' in the server
+- Stop the containers with 'docker-compose stop'
+- As a privileged user, execute the command 'docker-compose up -d'
+
+The server can be accessed through the URL http://diffme.drudi.org/v1/diff
