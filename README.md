@@ -85,3 +85,16 @@ The deployment automation is not finished yet. But a server was set up in Digita
 - As a privileged user, execute the command 'docker-compose up -d'
 
 The server can be accessed through the URL http://diffme.drudi.org/v1/diff
+
+Some example calls:
+
+```sh
+$ curl -XPUT http://diffme.drudi.org/v1/diff/right -d "gAN9cQAoWAMAAABiYXJxAVgEAAAAMTIzNHECWAMAAABmb29xA1gFAAAAd29ybGRxBHUu"
+{"bar": "1234", "foo": "world"}
+
+$ curl -XPUT http://diffme.drudi.org/v1/diff/left -d "KGRwMApTJ2ZvdScKcDEKUyd3b3JsZCcKcDIKc1MnYmFyJwpwMwpTJzU2NzgnCnA0CnMu"
+{"bar": "5678", "fou": "world"}
+
+$ curl -XGET http://diffme.drudi.org/v1/diff
+{"diffs": [[9, 4], [19, 1]], "equal": false, "same_size": true}
+```
