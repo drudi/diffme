@@ -5,14 +5,18 @@ python:
 
 sudo: required
 
-# Install dependencies
-install: "pip install -r requirements.txt"
 services:
   - redis
   - docker
+
+# Install dependencies
+install: "pip install -r requirements.txt"
 script: ./run_tests.sh
 
 build:
-  - docker-compose build
-  - docker-compose start
-  - docker-compose stop
+  - docker build -t mdrudi/diffme:latest .
+
+after_success:
+  - if [ "$TREVIS_BRANCH" == "master" ]; then
+    docker login -e="$DOCKER_EMAIL" -u="DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push mdrudi/diffme

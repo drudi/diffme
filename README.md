@@ -36,13 +36,35 @@ $ export REDIS_HOST=127.0.0.1
 $ sh run_api.sh
 ```
 
+For running the tests:
+
+```sh
+$ sh run_tests.#!/bin/sh
+```
 
 
 ## Build a docker image and run it locally
 
-You can also build a Docker container and run it locally. It uses 2 images and uses docker-compose to bring up the environment. To do so run the commands bellow inside the diffme directory:
+You can also build a Docker container and run it locally. It uses 2 images (the api image and a redis image) and uses docker-compose to bring up the environment. To do so run the commands bellow inside the diffme directory:
 
 ```sh
 $ docker-compose build
-$ docker-compose start
+$ docker-compose up
 ```
+
+The API will be available on localhost and port 8000. Some example calls to the api are:
+
+```sh
+$ curl -XPUT http://127.0.0.1:8000/v1/diff/right -d "gAN9cQAoWAMAAABiYXJxAVgEAAAAMTIzNHECWAMAAABmb29xA1gFAAAAd29ybGRxBHUu"
+{"bar": "1234", "foo": "world"}
+
+$ curl -XPUT http://127.0.0.1:8000/v1/diff/left -d "gAN9cQAoWAMAAABiYXJxAVgEAAAAMTIzNHECWAMAAABmb29xA1gFAAAAd29ybGRxBHUu"
+{"bar": "1234", "foo": "world"}
+
+$ curl -XGET http://127.0.0.1:8000/v1/diff
+{"equal": true, "diffs": [], "same_size": true}
+```
+
+## Docker image on Docker HUB
+
+The api image can be found on Docker HUB in the following address
