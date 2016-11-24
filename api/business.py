@@ -1,11 +1,15 @@
-import redis, json, pickle, difflib
+import redis
+import json
+import pickle
+import difflib
+import os
 from api.exceptions import *
 """
 Business logic for computing the diffs
 """
 
 class RawData(object):
-    _db_addr = 'redis'
+    _db_addr = os.getenv('REDIS_HOST', 'redis')
     _db_port = 6379
     _db_conn = None
 
