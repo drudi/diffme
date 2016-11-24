@@ -17,6 +17,7 @@ build:
   - docker build -t mdrudi/diffme:latest .
 
 after_success:
+  - echo $TREVIS_BRANCH;
   - if [ "$TREVIS_BRANCH" == "master" ]; then
     docker login -e="$DOCKER_EMAIL" -u="DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push mdrudi/diffme
